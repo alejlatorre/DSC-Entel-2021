@@ -1,6 +1,8 @@
  # %% 0. Librerias
+import numpy as np
 import pandas as pd 
-import numpy as np 
+import seaborn as sns 
+import matplotlib.pyplot as plt
 from geopy.geocoders import Nominatim
 
 # %% Datos
@@ -25,7 +27,25 @@ def get_region_from_geo(latitude, longitude):
 # %%
 df['region_origen'] = df.apply(lambda x: get_region_from_geo(str(x['latitud_origen']), str(x['longitud_origen'])), axis=1)
 df['region_destino'] = df.apply(lambda x: get_region_from_geo(str(x['latitud_destino']), str(x['longitud_destino'])), axis=1)
+df.loc[df.region_origen.isnull(), 'region_origen'] = 'Callao'
+df.loc[df.region_destino.isnull(), 'region_destino'] = 'Lima'
 
 # %%
-df.to_csv(out_path + 'file_with_state.csv')
+# df.to_csv(out_path + 'file_.csv')
+
 # %%
+# region_origen = []
+# region_destino = []
+# for i, row in df[df.region_origen.isnull()].iterrows():
+#     region_origen.append(geolocator.reverse(str(row['latitud_origen']) + ',' + str(row['longitud_origen'])).raw['address']['city'])
+# for i, row in df[df.region_destino.isnull()].iterrows():
+#     try:
+#         region_destino.append(geolocator.reverse(str(row['latitud_destino']) + ',' + str(row['longitud_destino'])).raw['address']['region'])
+#     except:
+#         np.nan
+
+# %%
+plt.figure(figsize=(15, 15))
+sns.heatmap(pd.crosstab(df.region_origen, df.region_destino))
+plt.show()
+
