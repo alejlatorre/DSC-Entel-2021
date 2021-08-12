@@ -8,20 +8,20 @@ Se pide determinar la ruta entre el origen y destino y estimar la distancia y el
 
 ## Archivos
 - train.csv - Contiene datos de las coordenadas de origen y destino, además de la distancia y el tiempo estimado para avaluar el algoritmo o técnica que estén - desarrollando.
-      ID: identificador del problema
-      FECHA: fecha en que ocurrió el problema
-      LATITUD_ORIGEN: latitud del personal técnico
-      LONGITUD_ORIGEN: longitud del personal técnico
-      LATITUD_DESTINO: latitud donde ocurre el problema
-      LONGITUD_DESTINO: Longitud donde ocurre el problema
-      DISTANCIA: distancia entre ambas coordenadas (metros)
-      TIEMPO: tiempo estimado en recorrer ambas coordenadas (segundos)
+      - ID: identificador del problema
+      - FECHA: fecha en que ocurrió el problema
+      - LATITUD_ORIGEN: latitud del personal técnico
+      - LONGITUD_ORIGEN: longitud del personal técnico
+      - LATITUD_DESTINO: latitud donde ocurre el problema
+      - LONGITUD_DESTINO: Longitud donde ocurre el problema
+      - DISTANCIA: distancia entre ambas coordenadas (metros)
+      - TIEMPO: tiempo estimado en recorrer ambas coordenadas (segundos)
 - test.csv - Contiene datos para evaluar su solución, se debe calcular la distancia y el tiempo.
-      ID: identificador del problema
-      FECHA: fecha en que ocurrió el problema
-      LATITUD_ORIGEN: latitud del personal técnico
-      LONGITUD_ORIGEN: longitud del personal técnico
-      LATITUD_DESTINO: latitud donde ocurre el problema
-      LONGITUD_DESTINO: Longitud donde ocurre el problema
+      - ID: identificador del problema
+      - FECHA: fecha en que ocurrió el problema
+      - LATITUD_ORIGEN: latitud del personal técnico
+      - LONGITUD_ORIGEN: longitud del personal técnico
+      - LATITUD_DESTINO: latitud donde ocurre el problema
+      - LONGITUD_DESTINO: Longitud donde ocurre el problema
       
 - sampleSubmission.csv - Un archivo de envío de muestra en el formato correcto
