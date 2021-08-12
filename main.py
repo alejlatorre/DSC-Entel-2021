@@ -27,5 +27,5 @@ df['region_origen'] = df.apply(lambda x: get_region_from_geo(str(x['latitud_orig
 df['region_destino'] = df.apply(lambda x: get_region_from_geo(str(x['latitud_destino']), str(x['longitud_destino'])), axis=1)
 
 # %%
-df.to_csv(out_path + 'file_with_region.csv')
+df.to_csv(out_path + 'file_with_state.csv')
 # %%
