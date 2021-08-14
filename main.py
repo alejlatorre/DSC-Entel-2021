@@ -30,6 +30,9 @@ def get_region_from_geo(latitude, longitude):
 
 
 # %%
+df = pd.read_csv(out_path + 'file_with_state.csv')
+
+# %%
 df['region_origen'] = df.apply(lambda x: get_region_from_geo(
     str(x['latitud_origen']), str(x['longitud_origen'])), axis=1)
 df['region_destino'] = df.apply(lambda x: get_region_from_geo(
@@ -43,10 +46,7 @@ df.loc[df.region_destino.isnull(), 'region_destino'] = 'Lima'
 # df.to_csv(out_path + 'file_.csv')
 
 # %%
-df = pd.read_csv(out_path + 'file_with_state.csv')
-
-# %%
-df['region_destino']
+df['id'].value_counts().sort_values(ascending=False)
 
 
 # %%
@@ -68,6 +68,22 @@ plt.show()
 # %%
 df.head()
 
+
+df['distancia_km'] = df['distancia']/1000
+
+# %%
+
+
+# %%
+
+df = df[df['distancia_km'] <= 275]
+
+
+# %%
+sns.set_style('whitegrid')
+sns.boxplot(df.distancia_km)
+# %%
+df.shape[0]
 
 # %%
 list_dist = []
@@ -96,6 +112,9 @@ df['tiempo_api'] = list_times
 # %%
 
 
+df.to_csv(out_path + 'file_cleaned.csv')
+
+
 # %%
 
 lon_1 = -77.12269
@@ -112,9 +131,16 @@ rts = json.loads(r.content)
 route_1 = rts.get("routes")[0]
 # %%
 
+i = df['id'][1911]
+lon_or = df.loc[df['id'] == i, 'longitud_origen'].values[0]
+lat_or = df.loc[df['id'] == i, 'latitud_origen'].values[0]
+lon_des = df.loc[df['id'] == i, 'longitud_destino'].values[0]
+lat_des = df.loc[df['id'] == i, 'latitud_origen'].values[0]
+# Uso de api
+r = requests.get(
+    f"http://router.project-osrm.org/route/v1/car/{lon_or},{lat_or};{lon_des},{lat_des}?overview=false""")
+rts = json.loads(r.content)
+route = rts.get("routes")[0]
 
-# %%
 
-
-route_1
 # %%
