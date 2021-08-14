@@ -147,8 +147,20 @@ test_data['region_destino'] = test_data.apply(lambda x: get_region_from_geo(
 
 # %%
 
-df.loc[df.region_origen.isnull(), 'region_origen'] = 'Callao'
-df.loc[df.region_destino.isnull(), 'region_destino'] = 'Lima'
+test_data.loc[test_data.region_origen.isnull(), 'region_origen'] = 'Callao'
+test_data.loc[test_data.region_destino.isnull(), 'region_destino'] = 'Lima'
+
+
+# %%%%
+
+
+test_data.loc[(test_data['region_destino'] != test_data['region_origen']) & (
+    test_data['region_destino'] != 'Lima')]
+
+
+# %%
+
+test_data.to_csv(out_path + 'test_with_states.csv')
 
 
 # %%
@@ -178,4 +190,12 @@ print(len(list_dist), len(list_times))
 
 test_data['distancia_api'] = list_dist
 test_data['tiempo_api'] = list_times
+
+# %%
+
+test_data.loc[test_data['distancia_api'] == 0]
+
+
+# %%
+test_data.to_csv(out_path + 'test_cleaned.csv')
 # %%
