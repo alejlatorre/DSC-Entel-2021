@@ -70,6 +70,30 @@ df.head()
 
 
 # %%
+list_dist = []
+list_times = []
+for i in df['id']:
+    # Obtener coordenadas
+    lon_or = df.loc[df['id'] == i, 'longitud_origen'].values[0]
+    lat_or = df.loc[df['id'] == i, 'latitud_origen'].values[0]
+    lon_des = df.loc[df['id'] == i, 'longitud_destino'].values[0]
+    lat_des = df.loc[df['id'] == i, 'latitud_origen'].values[0]
+    # Uso de api
+    r = requests.get(
+        f"http://router.project-osrm.org/route/v1/car/{lon_or},{lat_or};{lon_des},{lat_des}?overview=false""")
+    rts = json.loads(r.content)
+    route = rts.get("routes")[0]
+    # almacenado de valores
+    distancia = route['distance']
+    tiempo = route['duration']
+    list_dist.append(distancia)
+    list_times.append(tiempo)
+print(len(list_dist), len(list_times))
+
+df['distancia_api'] = list_dist
+df['tiempo_api'] = list_times
+
+# %%
 
 
 # %%
@@ -84,8 +108,11 @@ r = requests.get(
     f"http://router.project-osrm.org/route/v1/car/{lon_1},{lat};{lon_2},{lat_2}?overview=false""")
 # then you load the response using the json libray
 # by default you get only one alternative so you access 0-th element of the `routes`
-routes = json.loads(r.content)
-route_1 = routes.get("routes")[0]
+rts = json.loads(r.content)
+route_1 = rts.get("routes")[0]
+# %%
+
+
 # %%
 
 
