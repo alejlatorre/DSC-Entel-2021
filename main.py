@@ -1,4 +1,3 @@
-
 # %% 0. Librerias
 import json
 import requests
