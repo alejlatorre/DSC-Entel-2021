@@ -13,16 +13,13 @@ in_path = 'data/in/'
 out_path = 'data/out/'
 filename = 'train.csv'
 
-
 # %%
 df = pd.read_csv(in_path + filename)
-
 df.columns = map(str.lower, df.columns)
 df.columns = map(str.strip, df.columns)
 
 # %%
 geolocator = Nominatim(user_agent='scrapping_location')
-
 
 def get_region_from_geo(latitude, longitude):
     try:
